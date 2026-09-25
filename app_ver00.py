@@ -19,8 +19,14 @@ HEADERS = ["Bed Number", "Severity", "Oxygen Needed"] + [
 
 @st.cache_resource
 def get_worksheet():
-    client = gspread.service_account_from_dict(dict(st.secrets["gcp_service_account"]))
-    return client.open_by_url(st.secrets["sheet_url"]).sheet1
+    # Secrets use the [connections.gsheets] layout: the spreadsheet URL/key
+    # plus the service-account fields in one section.
+    creds = dict(st.secrets["connections"]["gsheets"])
+    spreadsheet = creds.pop("spreadsheet")
+    client = gspread.service_account_from_dict(creds)
+    if spreadsheet.startswith("http"):
+        return client.open_by_url(spreadsheet).sheet1
+    return client.open_by_key(spreadsheet).sheet1
 
 
 def save_row(bed, severity, oxygen, indicators):

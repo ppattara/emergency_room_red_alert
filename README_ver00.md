@@ -69,13 +69,14 @@ Share the Google Sheet (Editor access) with the service account's
 
 ### 2. Add secrets
 
-Locally, create `.streamlit/secrets.toml`. On Streamlit Community Cloud, paste
-the same content into the app's **Settings → Secrets**.
+Paste the contents of `secrets.toml` (kept in the project root and gitignored)
+into the app's **Settings → Secrets** on Streamlit Community Cloud. The format
+is:
 
 ```toml
-sheet_url = "https://docs.google.com/spreadsheets/d/..."
+[connections.gsheets]
+spreadsheet = "https://docs.google.com/spreadsheets/d/..."
 
-[gcp_service_account]
 type = "service_account"
 project_id = "..."
 private_key_id = "..."
@@ -88,8 +89,9 @@ auth_provider_x509_cert_url = "https://www.googleapis.com/oauth2/v1/certs"
 client_x509_cert_url = "..."
 ```
 
-The fields under `[gcp_service_account]` are the ones in the service account's
-JSON key file. Never commit `secrets.toml` to the repo.
+`spreadsheet` can be the sheet's full URL or just its key. The other fields
+are the ones in the service account's JSON key file. Never commit
+`secrets.toml` to the repo.
 
 ### 3. Run locally
 
