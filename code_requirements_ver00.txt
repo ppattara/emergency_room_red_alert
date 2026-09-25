@@ -1,0 +1,37 @@
+This is the demo for the web app that we are going to build.
+
+The program should be made in python/streamlit, to be deployed in the streamlit
+cloud community. The details of the program should be as follow:
+
+1. The overall layout of the page should have two tabs. The first tab is called
+"Input Information". The second tab is called "Display Information".
+
+2. The "Input Information" tab should have 5 parts, as follow:
+   - "Bed Number". This part takes a number.
+   - "Severity". This is a radio button with 3 options: Severe (Red),
+     Semi-severe (Pink), and Not-severe (Yellow).
+   - "Oxygen Needed". This is another radio button with 3 options: High flow,
+     Normal, None.
+   - "Severity Indicator". This is a checkbox with 7 options: 1 through 7.
+   - One button at the bottom to press once everything is selected.
+
+3. Once the "Input Information" tab is filled (the button at the bottom pressed),
+the data should be saved to a private google sheet.  The format for the sheet
+should follow the format of the input: 1 column for bed number, 1 columns for
+severity level, 1 column for oxygen need, and 7 columns (true/false) for
+severity indicator. The data should be appended to the first empty row in the
+sheet. The API connection and service account to do this is established.
+
+4. The "Display Information" tab should read from the google sheet and show the
+information in the format below. If this tab is chosen and the google sheet is
+found to be empty, show some message like "no data input yet" or something
+similar.
+   - "Bed number" is printed in big white font, with background color being the
+     color of the severity level.
+   - "Oxygen needed" is printed out next to bed number.
+   - "Severity indicator" shows the number (out of 7) of the ticked boxes.
+
+5. Note that this program is a demo. The goal is to start with empty google
+sheet (with only the header row), and show that the input information ends up
+in the google sheet and get displayed. For now, expect to deal with only 1 row
+of data in the google sheet.
